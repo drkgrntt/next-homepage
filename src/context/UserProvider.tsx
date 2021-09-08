@@ -21,11 +21,7 @@ const UserProvider = ({ children }) => {
 
   const register = async (email, password) => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        getAuth(),
-        email,
-        password
-      )
+      await createUserWithEmailAndPassword(getAuth(), email, password)
     } catch ({ code, message }) {
       console.error({ code, message })
     }
@@ -33,11 +29,7 @@ const UserProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        getAuth(),
-        email,
-        password
-      )
+      await signInWithEmailAndPassword(getAuth(), email, password)
     } catch ({ code, message }) {
       console.error({ code, message })
     }

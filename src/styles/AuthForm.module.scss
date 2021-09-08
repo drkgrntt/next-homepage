@@ -1,0 +1,25 @@
+@import './variables.scss';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input {
+  padding: 0.3rem 0.7rem;
+  font-size: 1rem;
+  border-radius: 0.2rem;
+  border: 0.1rem solid $grey;
+}
+
+.submit {
+  font-size: 1rem;
+  padding: 0.3rem 0.7rem;
+  background-color: $cta;
+  border: 0.1rem solid $cta;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  color: $white;
+  align-self: flex-end;
+}

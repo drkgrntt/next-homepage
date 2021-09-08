@@ -1,30 +1,23 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
+import AuthForm from '../components/AuthForm'
+import Card from '../components/Card'
 import userContext from '../context/userContext'
+import styles from '../styles/Login.module.scss'
 
 const Login = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const { login } = useContext(userContext)
+  const { login, register } = useContext(userContext)
 
   return (
-    <form
-      onSubmit={async (event) => {
-        event.preventDefault()
-        await login(email, password)
-      }}
-    >
-      <input
-        type="email"
-        value={email}
-        onChange={(event) => setEmail(event.target.value)}
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(event) => setPassword(event.target.value)}
-      />
-      <input type="submit" />
-    </form>
+    <div className={styles.login}>
+      <Card>
+        <h3 className={styles.title}>Login</h3>
+        <AuthForm onSubmit={login} />
+      </Card>
+      <Card>
+        <h3 className={styles.title}>Register</h3>
+        <AuthForm onSubmit={register} />
+      </Card>
+    </div>
   )
 }
 

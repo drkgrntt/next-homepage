@@ -6,11 +6,13 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth'
+import { useRouter } from 'next/dist/client/router'
 import { useEffect, useState } from 'react'
 import userContext from './userContext'
 
 const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<User | null>()
+  const { push } = useRouter()
 
   useEffect(() => {
     onAuthStateChanged(getAuth(), (user) => {
@@ -21,6 +23,7 @@ const UserProvider = ({ children }) => {
   const register = async (email, password) => {
     try {
       await createUserWithEmailAndPassword(getAuth(), email, password)
+      push('/')
     } catch ({ code, message }) {
       console.error({ code, message })
     }
@@ -29,6 +32,7 @@ const UserProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       await signInWithEmailAndPassword(getAuth(), email, password)
+      push('/')
     } catch ({ code, message }) {
       console.error({ code, message })
     }

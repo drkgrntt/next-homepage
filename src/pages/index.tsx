@@ -12,9 +12,17 @@ const Home = () => {
 
   const renderAuthLink = () => {
     if (currentUser) {
-      return <button onClick={() => logout()}>Logout</button>
+      return (
+        <button className="button" onClick={() => logout()}>
+          Logout
+        </button>
+      )
     } else {
-      return <Link href="/login">Login</Link>
+      return (
+        <Link href="/login">
+          <a className="button">Login</a>
+        </Link>
+      )
     }
   }
 
@@ -27,7 +35,7 @@ const Home = () => {
       <Card>
         <Clock />
       </Card>
-      {renderAuthLink()}
+      <Card>{renderAuthLink()}</Card>
     </div>
   )
 }

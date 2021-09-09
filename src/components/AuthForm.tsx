@@ -14,18 +14,18 @@ const AuthForm = ({ onSubmit }) => {
       }}
     >
       <input
-        className={styles.input}
+        className="input"
         type="email"
         value={email}
         onChange={(event) => setEmail(event.target.value)}
       />
       <input
-        className={styles.input}
+        className="input"
         type="password"
         value={password}
         onChange={(event) => setPassword(event.target.value)}
       />
-      <input className={styles.submit} type="submit" />
+      <input className="button" type="submit" />
     </form>
   )
 }

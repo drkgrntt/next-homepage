@@ -14,10 +14,11 @@ const BookmarkForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <input
+        className="input"
         value={url}
         onChange={(event) => setUrl(event.target.value)}
       />
-      <input type="submit" />
+      <input className="button" type="submit" />
     </form>
   )
 }

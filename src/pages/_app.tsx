@@ -3,6 +3,7 @@ import { initializeApp } from 'firebase/app'
 import { getAnalytics } from 'firebase/analytics'
 import UserProvider from '../context/UserProvider'
 import Head from 'next/head'
+import BookmarkProvider from '../context/BookmarkProvider'
 
 const App = ({ Component, pageProps }) => {
   const firebaseConfig = {
@@ -23,12 +24,14 @@ const App = ({ Component, pageProps }) => {
 
   return (
     <UserProvider>
-      <Head>
-        <title>Homepage</title>
-        <meta name="description" content="A Homepage" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Component {...pageProps} />
+      <BookmarkProvider>
+        <Head>
+          <title>Homepage</title>
+          <meta name="description" content="A Homepage" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <Component {...pageProps} />
+      </BookmarkProvider>
     </UserProvider>
   )
 }

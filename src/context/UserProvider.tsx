@@ -14,7 +14,6 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     onAuthStateChanged(getAuth(), (user) => {
-      console.log(user)
       setCurrentUser(user)
     })
   })

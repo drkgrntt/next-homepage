@@ -15,10 +15,11 @@ const UserProvider = ({ children }) => {
   const { push } = useRouter()
 
   useEffect(() => {
-    onAuthStateChanged(getAuth(), (user) => {
+    const unsubscribe = onAuthStateChanged(getAuth(), (user) => {
       setCurrentUser(user)
     })
-  })
+    return () => unsubscribe()
+  }, [])
 
   const register = async (email, password) => {
     try {

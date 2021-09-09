@@ -3,6 +3,7 @@ import {
   getDatabase,
   ref,
   set,
+  remove,
   push,
   onValue,
   query,
@@ -31,7 +32,7 @@ const BookmarkProvider = ({ children }) => {
       orderByChild('userId'),
       equalTo(currentUser.uid)
     )
-    onValue(bookmarksQuery, (snapshot) => {
+    const unsubscribe = onValue(bookmarksQuery, (snapshot) => {
       const data = snapshot.val()
       if (!data) {
         setBookmarks([])
@@ -47,6 +48,8 @@ const BookmarkProvider = ({ children }) => {
       })
       setBookmarks(bookmarks)
     })
+
+    return () => unsubscribe()
   }, [currentUser])
 
   const addBookmark = async (url: string) => {
@@ -58,11 +61,17 @@ const BookmarkProvider = ({ children }) => {
     })
   }
 
+  const removeBookmark = async (id: string) => {
+    const bookmarkRef = ref(db, `bookmarks/${id}`)
+    await remove(bookmarkRef)
+  }
+
   return (
     <bookmarkContext.Provider
       value={{
         bookmarks,
         addBookmark,
+        removeBookmark,
       }}
     >
       {children}

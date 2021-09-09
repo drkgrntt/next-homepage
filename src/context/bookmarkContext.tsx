@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import {
   getDatabase,
   ref,
@@ -10,11 +10,23 @@ import {
   equalTo,
   orderByChild,
 } from 'firebase/database'
-import bookmarkContext from './bookmarkContext'
 import userContext from './userContext'
 import Bookmark from '../types/Bookmark'
 
-const BookmarkProvider = ({ children }) => {
+interface BookmarkContext {
+  bookmarks: Bookmark[]
+  addBookmark: Function
+  removeBookmark: Function
+}
+
+const bookmarkContext = createContext<BookmarkContext>({
+  bookmarks: [],
+  addBookmark: (url: string) => {},
+  removeBookmark: (id: string) => {},
+})
+export default bookmarkContext
+
+export const BookmarkProvider = ({ children }) => {
   const { currentUser } = useContext(userContext)
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([])
 
@@ -78,5 +90,3 @@ const BookmarkProvider = ({ children }) => {
     </bookmarkContext.Provider>
   )
 }
-
-export default BookmarkProvider

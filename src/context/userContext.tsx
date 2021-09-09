@@ -6,11 +6,25 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth'
-import { useRouter } from 'next/dist/client/router'
-import { useEffect, useState } from 'react'
-import userContext from './userContext'
+import { useRouter } from 'next/router'
+import { createContext, useEffect, useState } from 'react'
 
-const UserProvider = ({ children }) => {
+interface UserContext {
+  currentUser: User | null
+  login: Function
+  logout: Function
+  register: Function
+}
+
+const userContext = createContext<UserContext>({
+  currentUser: null,
+  login: (email, password) => {},
+  register: (email, password) => {},
+  logout: () => {},
+})
+export default userContext
+
+export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<User | null>()
   const { push } = useRouter()
 
@@ -56,5 +70,3 @@ const UserProvider = ({ children }) => {
     </userContext.Provider>
   )
 }
-
-export default UserProvider

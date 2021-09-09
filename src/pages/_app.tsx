@@ -1,9 +1,9 @@
 import '../styles/globals.scss'
 import { initializeApp } from 'firebase/app'
 import { getAnalytics } from 'firebase/analytics'
-import UserProvider from '../context/UserProvider'
 import Head from 'next/head'
-import BookmarkProvider from '../context/BookmarkProvider'
+import { UserProvider } from '../context/userContext'
+import { BookmarkProvider } from '../context/bookmarkContext'
 
 const App = ({ Component, pageProps }) => {
   const firebaseConfig = {

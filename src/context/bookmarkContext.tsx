@@ -21,7 +21,7 @@ interface BookmarkContext {
 
 const bookmarkContext = createContext<BookmarkContext>({
   bookmarks: [],
-  addBookmark: (url: string) => {},
+  addBookmark: (data) => {},
   removeBookmark: (id: string) => {},
 })
 export default bookmarkContext
@@ -56,6 +56,8 @@ export const BookmarkProvider = ({ children }) => {
           id: key,
           userId: data[key].userId,
           url: data[key].url,
+          name: data[key].name,
+          folder: data[key].folder,
         }
       })
       setBookmarks(bookmarks)
@@ -64,12 +66,14 @@ export const BookmarkProvider = ({ children }) => {
     return () => unsubscribe()
   }, [currentUser])
 
-  const addBookmark = async (url: string) => {
+  const addBookmark = async ({ url, name, folder }) => {
     if (!currentUser) return
 
     await set(push(bookmarksRef), {
       userId: currentUser.uid,
       url,
+      name,
+      folder,
     })
   }
 
